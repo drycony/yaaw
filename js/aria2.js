@@ -84,14 +84,14 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           cnt += 1;
       }
       if (cnt > 1)
-        title += " ("+cnt+ " files..)"
+        title += " ("+cnt+ " 文件..)"
     }
     return title;
   }
 
   return {
     init: function(path, onready) {
-      var connect_msg_id = main_alert("alert-info", "connecting...");
+      var connect_msg_id = main_alert("alert-info", "正在连接...");
       $("#add-task-option-wrap").empty().append(YAAW.tpl.add_task_option({}));
       $("#aria2-gsetting").empty().append(YAAW.tpl.aria2_global_setting({}));
 
@@ -314,7 +314,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       });
 
       if (uris.length == 0) {
-        main_alert("alert-error", "没发现文件！（BT任务无法重新启动。）", 2000);
+        main_alert("alert-error", "没发现文件！（BT任务无法启动。）", 2000);
       } else if (uris.length == 1) {
         $("#add-task-modal").modal("show");
         $("#uri-input").val(uris[0]);
