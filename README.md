@@ -37,3 +37,7 @@ License
 -------
 yaaw is licensed under GNU Lesser General Public License.
 You may get a copy of the GNU Lesser General Public License from http://www.gnu.org/licenses/lgpl.txt
+
+汉化
+----
+中文完全汉化  wzhy90

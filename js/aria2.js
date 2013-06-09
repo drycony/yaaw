@@ -39,7 +39,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
     var error_msg = get_error(result);
 
     $("#main-alert .alert").attr("class", "alert alert-error");
-    $("#main-alert .alert-msg").html("<strong>Error: </strong>"+error_msg);
+    $("#main-alert .alert-msg").html("<strong>错误: </strong>"+error_msg);
     $("#main-alert").show();
   }
 
@@ -64,7 +64,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
 
   function get_title(result) {
     var dir = result.dir;
-    var title = "Unknown";
+    var title = "未知";
     if (result.bittorrent && result.bittorrent.info && result.bittorrent.info.name)
       title = result.bittorrent.info.name;
     else if (result.files[0].path.replace(
@@ -130,7 +130,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
         };
         jsonrpc_ws.onerror = function(event) {
           console.warn("error", event);
-          main_alert("alert-error", "websocket error. you may need reflush this page to restart.");
+          main_alert("alert-error", "WebSocket错误。您可能需要刷新页面重新启动。");
           ws_callback = {};
         };
         jsonrpc_ws.onopen = function() {
@@ -142,7 +142,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           }
         };
       } else {
-        main_alert("alert-error", "Unknow protocol");
+        main_alert("alert-error", "未知协议");
       };
     },
 
@@ -314,7 +314,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       });
 
       if (uris.length == 0) {
-        main_alert("alert-error", "No files found! (BitTorrent tasks can't restart.)", 2000);
+        main_alert("alert-error", "没发现文件！（BT任务无法重新启动。）", 2000);
       } else if (uris.length == 1) {
         $("#add-task-modal").modal("show");
         $("#uri-input").val(uris[0]);
@@ -335,7 +335,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
 
           if (select_lock) return;
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           var snapshot = new Array();
@@ -365,7 +365,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           //console.debug(result);
 
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           var snapshot = new Array();
@@ -390,7 +390,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
         function(result) {
           if (select_lock) return;
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           result = ARIA2.status_fix(result.result);
@@ -415,7 +415,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           //console.debug(result);
 
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           if (select_lock) return;
@@ -461,7 +461,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
         function(result) {
           //console.debug(result);
 
-          main_alert("alert-info", "Moved", 1000);
+          main_alert("alert-info", "已移动", 1000);
           ARIA2.refresh();
         }
       );
@@ -480,7 +480,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           });
 
           if (error.length == 0) {
-            main_alert("alert-info", "Paused", 1000);
+            main_alert("alert-info", "已暂停", 1000);
             ARIA2.refresh();
           } else {
             main_alert("alert-error", error.join("<br />"), 3000);
@@ -502,7 +502,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           });
 
           if (error.length == 0) {
-            main_alert("alert-info", "Started", 1000);
+            main_alert("alert-info", "已开始", 1000);
             ARIA2.refresh();
           } else {
             main_alert("alert-error", error.join("<br />"), 3000);
@@ -524,7 +524,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           });
 
           if (error.length == 0) {
-            main_alert("alert-info", "Removed", 1000);
+            main_alert("alert-info", "已删除", 1000);
             ARIA2.refresh();
           } else {
             main_alert("alert-error", error.join("<br />"), 3000);
@@ -546,7 +546,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           });
 
           if (error.length == 0) {
-            main_alert("alert-info", "Removed", 1000);
+            main_alert("alert-info", "已删除", 1000);
             ARIA2.tell_stoped();
           } else {
             main_alert("alert-error", error.join("<br />"), 3000);
@@ -583,7 +583,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           //console.debug(result);
 
           ARIA2.refresh();
-          main_alert("alert-info", "Paused all tasks. Please wait for action such as contacting BitTorrent tracker.", 2000);
+          main_alert("alert-info", "已暂停所有任务。请等待断开BT服务器。", 2000);
         }
       );
     },
@@ -594,7 +594,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           //console.debug(result);
 
           ARIA2.refresh();
-          main_alert("alert-info", "Unpaused all tasks.", 2000);
+          main_alert("alert-info", "已恢复所有任务", 2000);
         }
       );
     },
@@ -605,7 +605,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
           //console.debug(result);
 
           ARIA2.refresh();
-          main_alert("alert-info", "Removed all completed/error/removed downloads tasks.", 2000);
+          main_alert("alert-info", "移除所有已完成/错误/已删除的下载任务。", 2000);
         }
       );
     },
@@ -614,7 +614,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("getGlobalOption", [],
         function(result) {
           if (!result.result)
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
 
           result = result.result;
           $("#aria2-gsetting").empty().append(YAAW.tpl.aria2_global_setting(result));
@@ -626,7 +626,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("getGlobalOption", [],
         function(result) {
           if (!result.result)
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
 
           result = result.result;
           result["parameterized-uri"] = (result["parameterized-uri"] == "true" ? true : false)
@@ -639,7 +639,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("changeGlobalOption", [options],
         function(result) {
           if (!result.result)
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           else
             main_alert("alert-success", "Saved", 2000);
         }
@@ -650,7 +650,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("getGlobalStat", [],
         function(result) {
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           result = result.result;
@@ -677,7 +677,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("getVersion", [],
         function(result) {
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           $("#global-version").text("Aria2 "+result.result.version || "");
@@ -689,7 +689,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("tellStatus", [gid],
         function(result) {
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           }
 
           result = result.result;
@@ -708,9 +708,9 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
       ARIA2.request("changeOption", [gid, options],
         function(result) {
           if (!result.result) {
-            main_alert("alert-error", "<strong>Error: </strong>rpc result error.", 5000);
+            main_alert("alert-error", "<strong>错误: </strong>RPC发生错误。", 5000);
           } else {
-            main_alert("alert-success", "Change Options OK!", 2000);
+            main_alert("alert-success", "成功保存设置!", 2000);
           }
         }
       );
@@ -742,7 +742,7 @@ if (typeof ARIA2=="undefined"||!ARIA2) var ARIA2=(function(){
         ARIA2.global_stat();
         if (select_lock) {
           if (need_refresh) {
-            main_alert("", "Task list have changed since last update. Click 'Refresh' button to update task list.");
+            main_alert("", "任务列表已更改。点击“刷新”更新列表。");
           }
         } else {
           if (need_refresh) {
