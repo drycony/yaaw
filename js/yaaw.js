@@ -84,7 +84,7 @@ var YAAW = (function() {
           indexes.push(n.getAttribute("data-index"));
         });
         if (indexes.length == 0) {
-          ARIA2.main_alert("alert-error", "At least one file should be selected. Or just stop the task.", 5000);
+          ARIA2.main_alert("alert-error", "最少需要选择一个文件。或者暂停任务。", 5000);
         } else {
           var options = {
             "select-file": indexes.join(","),
@@ -163,7 +163,7 @@ var YAAW = (function() {
         }
       } else {
         $("#torrent-up-input").remove();
-        $("#torrent-up-btn").addClass("disabled").tooltip({title: "File API is Not Supported."});
+        $("#torrent-up-btn").addClass("disabled").tooltip({title: "文件API不支持。"});
       }
 
       if (window.applicationCache) {
@@ -173,7 +173,7 @@ var YAAW = (function() {
             $("#offline-cached").text("cached");
         });
         appcache.addEventListener("cached", function(){
-          $("#offline-cached").text("cached");
+          $("#offline-cached").text("缓存");
         });
       }
     },
@@ -269,13 +269,13 @@ var YAAW = (function() {
         error_msg: function() {
           var error_code_map = {
             0: "",
-            1: "unknown error occurred.",
-            2: "time out occurred.",
-            3: "resource was not found.",
-            4: "resource was not found. See --max-file-not-found option.",
-            5: "resource was not found. See --lowest-speed-limit option.",
-            6: "network problem occurred.",
-            7: "unfinished download.",
+            1: "出现未知错误。",
+            2: "超时。",
+            3: "未发现资源。",
+            4: "未发现资源。See --max-file-not-found option.",
+            5: "未发现资源。See --lowest-speed-limit option.",
+            6: "出现网络错误",
+            7: "未完成下载。",
             8: "remote server did not support resume when resume was required to complete download.",
             9: "there was not enough disk space available.",
             10: "piece length was different from one in .aria2 control file. See --allow-piece-length-change option.",
